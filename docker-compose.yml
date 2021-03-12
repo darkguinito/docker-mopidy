@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  mopidy:
+    build:
+      context: .
+    ports:
+      - 6680:6680
+    volumes:
+      - ./data:/mnt/music
