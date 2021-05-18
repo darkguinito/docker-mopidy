@@ -1,0 +1,9 @@
+[muse]
+enabled = true
+# the following are optional values
+mopidy_host = $MOPIDY_HOST
+mopidy_port = $MOPIDY_PORT
+mopidy_ssl = $MOPIDY_SSL
+snapcast_host = $SNAPCAST_HOST
+snapcast_port = $SNAPCAST_PORT
+snapcast_ssl = $SNAPSERVER_SSL

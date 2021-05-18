@@ -15,12 +15,12 @@ config_file =
 [audio]
 mixer = software
 mixer_volume = ${VOLUME_PERCENTAGE}
-output = audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! tcpclientsink host=$SNAPSERVER_HOST port=$SNAPSERVER_PORT
+output = audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! tcpclientsink host=snapcast port=4953
 
 [http]
 enabled  = true
 hostname = 0.0.0.0
-default_app = $DEFAULT_ROOT_PATH
+default_app = muse
 
 [m3u]
 enabled = true
@@ -31,7 +31,7 @@ playlists_dir = /var/lib/mopidy/m3u/playlists
 
 [file]
 enabled = true
-media_dirs = $MEDIA_DIRS
+media_dirs = /mnt/music
 show_dotfiles = false
 excluded_file_extensions =
   .directory
@@ -46,3 +46,13 @@ excluded_file_extensions =
   .zip
 follow_symlinks = false
 metadata_timeout = 1000
+
+[muse]
+enabled = true
+# the following are optional values
+mopidy_host = localhost
+mopidy_port = 1780
+mopidy_ssl = false
+snapcast_host = snapserver
+snapcast_port = 1780
+snapcast_ssl = false

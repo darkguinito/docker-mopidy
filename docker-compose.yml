@@ -2,9 +2,37 @@ version: "3.9"
 
 services:
   mopidy:
+    image: darkinito/mopidy:latest
     build:
       context: .
+      target: Muse
     ports:
-      - 6680:6680
+    - 6680:6680
     volumes:
-      - ./data:/mnt/music
+    - ./data:/mnt/music
+    environment:
+    - SNAPSERVER_HOST=snapcast
+    - SNAPSERVER_PORT=4953
+    - SNAPSCAST_HOST=snapcast
+    - SNAPCAST_PORT=1780
+    - SNAPCAST_SSL=false
+    - VOLUME_PERCENTAGE=50
+    - DEFAULT_ROOT_PATH=muse
+    - MEDIA_DIRS=/mnt/music
+    - MOPIDY_HOST=localhost
+    - MOPIDY_PORT=1780
+    - MOPIDY_SSL=false
+  snapcast:
+    image: darkinito/snapserver:latest
+    ports:
+    - 1705:1705
+    - 1704:1704
+    - 4953:4953
+    - 1780:1780
+    environment:
+    - TCP_BIND_ADDRESS=0.0.0.0
+    - TCP_LISTEN_PORT=1705
+    - STREAM_BIND_ADDRESS=0.0.0.0
+    - STREAM_LISTEN_PORT=1704
+    - STREAM_NAME=mopidy_tcp
+    - STREAM_PORT=4953
